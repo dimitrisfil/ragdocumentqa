@@ -1,0 +1,32 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /springai
+spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  ai:
+    anthropic:
+      api-key: ${ANTHROPIC_KEY}
+      chat:
+        #enabled: true # By default its true, this triggers the autoconfiguration.
+        options:
+          model: claude-haiku-4-5-20251001
+          #max-tokens: 2000
+          temperature: 1.0
+    vectorstore:
+      pgvector:
+        initialize-schema: true
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/docs
+    username: admin
+    password: password
+    hikari:
+      minimumIdle: 1
+      maximumPoolSize: 10
+      validationQuery: SELECT 1
+  flyway:
+    enabled: false
